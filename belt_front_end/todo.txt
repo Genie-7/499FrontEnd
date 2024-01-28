@@ -1,0 +1,17 @@
+  In General:
+ - Login, register; extension logout
+ - Dashboard for students and doctors
+ - Nav
+ 
+ Students:
+ - Let students view matching positions. They can click into a position for a more detailed view and then from there apply to it.
+ - Let students view applications and their status
+ - Let students add relevant classes they've taken
+ - let students specify a location preference
+
+ Doctors:
+ - For doctors, provide a way for them to post new residency positions 
+   (Create Residency position request, optionally can specify class requirements)
+ - Let doctors manage/update/delete residency positions
+ - Let doctors view applications to these positions
+ - Let doctors accept/reject applications
