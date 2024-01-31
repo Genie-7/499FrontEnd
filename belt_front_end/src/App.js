@@ -7,7 +7,8 @@ import Register from './components/Register'; // Adjust path as necessary
 import UserTypeSelect from './components/UserTypeSelect';
 import CreateDoctor from './components/CreateDoctor';
 import DoctorDashboard from './components/DoctorDashboard';
-
+import CreateStudent from './components/CreateStudent';
+import StudentDashboard from './components/StudentDashboard';
 
 function App() {
   return (
@@ -21,7 +22,9 @@ function App() {
           <Route path="/register" element={<Register />} /> 
           <Route path="/userTypeSelect" element={<UserTypeSelect />} />    
           <Route path="/createDoctor" element={<CreateDoctor />} />
-          <Route path="/doctorDashboard" element={<DoctorDashboard />} />   
+          <Route path="/doctorDashboard" element={<DoctorDashboard />} /> 
+          <Route path="/createStudent" element={<CreateStudent />} />  
+          <Route path="/studentDashboard" element={<StudentDashboard />} />
         </Routes>
       </div>
     </Router>

@@ -2,34 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-/* class createDoctorRequest{
-    constructor (name, dob, gender, medical_institution_id, medical_discipline){
-        this.name = name;
-        this.dob = dob;
-        this.gender = gender;
-        this.medical_institution_id = parseInt(medical_institution_id);
-        this.medical_discipline = medical_discipline;
-    }
-} */
-
 const CreateDoctor = () => {
     const [formData, setFormData] = useState({
         name: '',
         dob: '',
         gender: '',
         medical_institution_id: 0,
-        medical_discipline: ''
+        medical_discipline: '',
+        user_id: 0
     });
 
     const navigate = useNavigate(); // Initialize useNavigate
 
     const handleChange = (e) => {
-        if(e.target.name.localeCompare("medical_institution_id") === 0){
-            setFormData({ ...formData, [e.target.name]: parseInt(e.target.value) });
-        }
-        else{
-            setFormData({ ...formData, [e.target.name]: e.target.value });
-        }
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
@@ -44,6 +30,7 @@ const CreateDoctor = () => {
             };
             // Adjust the URL as necessary for your API endpoint
             formData.medical_institution_id = parseInt(formData.medical_institution_id)
+            formData.user_id = parseInt(localStorage.getItem("userId"));
             const body = JSON.stringify(formData);
             console.log(body);
             const response = await axios.post('http://localhost:8000/api/doctor/create', body, config);

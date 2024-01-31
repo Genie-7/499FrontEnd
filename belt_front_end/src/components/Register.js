@@ -30,8 +30,12 @@ const Register = () => {
             console.log(response.data); // Handle response, e.g., storing the user token
             //Get auth token
             // Extract the token from the response and store it in local storage
-            const { token } = response.data.data;
+            const response_obj = response.data.data;
+            const token = response_obj.token;
+            const id = response_obj.user.id;
+            
             localStorage.setItem('authToken', token); // Save the token
+            localStorage.setItem('userId', id);
             navigate('/userTypeSelect'); // Redirect to another route on success
         } catch (error) {
             console.error(error.response.data); // Handle error
