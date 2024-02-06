@@ -43,7 +43,7 @@ const CreateDoctor = () => {
     };
 
     return (
-        <div>
+        <div className="container container-default w-25">
             <h2>Create Doctor</h2>
             <form onSubmit={handleSubmit}>
                 <input

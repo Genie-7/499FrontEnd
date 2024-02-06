@@ -21,7 +21,7 @@ const CreateStudent = () => {
     };
 
     const handleRadio = (e) => {
-        formData.prefers_research = !formData.prefers_research;
+        formData.prefers_research = e.value;
     }
 
     const handleSubmit = async (e) => {
@@ -50,67 +50,107 @@ const CreateStudent = () => {
     };
 
     return (
-        <div>
+        <div className="container container-default w-25">
             <h2>Create Student</h2>
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Name"
-                    required
-                />
-                <input
-                    type="date"
-                    name="dob"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    placeholder="Date of Birth (YYYY-MM-DD"
-                    required
-                />
-                <input
-                    type="text"
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    placeholder="gender"
-                    required
-                />
-                <input
-                    type="number"
-                    name="graduation_year"
-                    value={formData.graduation_year}
-                    onChange={handleChange}
-                    placeholder="Graduation year"
-                    required
-                />
-                <input
-                    type="text"
-                    name="educational_institution_id"
-                    value={formData.educational_institution_id}
-                    onChange={handleChange}
-                    placeholder="School ID"
-                    required
-                />
-                <input
-                    type="text"
-                    name="medical_discipline"
-                    value={formData.medical_discipline}
-                    onChange={handleChange}
-                    placeholder="Medical discipline"
-                    required
-                />
-                <p>
-                    Do you prefer research positions?
-                </p>
-                <input
-                    type="radio"
-                    name="prefers_research"
-                    value=""
-                    onChange={handleRadio}
-                />
-                <button type="submit">Create Student</button>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Name"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="date"
+                        className="form-control"
+                        name="dob"
+                        value={formData.dob}
+                        onChange={handleChange}
+                        placeholder="Date of Birth"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleChange}
+                        placeholder="gender"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="number"
+                        className="form-control"
+                        name="graduation_year"
+                        value={formData.graduation_year}
+                        onChange={handleChange}
+                        placeholder="Graduation year"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="educational_institution_id"
+                        value={formData.educational_institution_id}
+                        onChange={handleChange}
+                        placeholder="School ID"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="medical_discipline"
+                        value={formData.medical_discipline}
+                        onChange={handleChange}
+                        placeholder="Medical discipline"
+                        required
+                    />
+                </div>
+                <fieldset className="form-group">
+                    <p>
+                        Do you prefer research positions?
+                    </p>
+                    <div className="row justify-content-center">
+                        <div className="col-sm-10">
+                            <input
+                                type="radio"
+                                className="form-check-input"
+                                name="prefers_research"
+                                value="yes"
+                                id="prefers_research_yes"
+                                onChange={handleRadio(true)}
+                            />
+                            <label className="form-check-label" for="prefers_research_yes">Yes</label>
+                        </div>
+                        <div className="col-sm-10">
+                            <input
+                                type="radio"
+                                className="form-check-input"
+                                name="prefers_research"
+                                value="no"
+                                id="prefers_research_no"
+                                onChange={handleRadio(false)}
+                                checked
+                            />
+                            <label className="form-check-label" for="prefers_research_no">No</label>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <button type="submit" className="btn btn-primary w-100">Create Student</button>
             </form>
         </div>
     );

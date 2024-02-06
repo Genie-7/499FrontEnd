@@ -19,4 +19,21 @@
 
 body {
   padding-top: 56px; /* Adjust based on the actual height of your navbar */
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.container-default {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
 }

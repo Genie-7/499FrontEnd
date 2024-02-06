@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Matches from './components/Matches';
@@ -17,7 +17,7 @@ import Navbar from './components/Navbar'; // Ensure this is correctly imported
 function App() {
   return (
     <Router>
-      <div>
+      <div className="w-100 h-100 jumbotron d-flex align-items-center" id="content">
         <Navbar />
 
         <Routes>

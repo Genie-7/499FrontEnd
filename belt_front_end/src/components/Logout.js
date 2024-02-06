@@ -1,3 +1,4 @@
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -29,7 +30,9 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <div className="w-25 container container-default">
+      <button type="submit" className="btn btn-primary w-100" onClick={handleLogout}>Log out</button>
+    </div>
   );
 };
 
