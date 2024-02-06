@@ -1,10 +1,9 @@
   In General:
- - Login, register; extension logout
  - Dashboard for students and doctors
  - Nav
  
  Students:
- - Let students view matching positions. They can click into a position for a more detailed view and then from there apply to it.
+ - They can click into a position for a more detailed view and then from there apply to it.
  - Let students view applications and their status
  - Let students add relevant classes they've taken
  - let students specify a location preference
