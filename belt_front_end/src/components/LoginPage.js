@@ -23,8 +23,14 @@ const LoginPage = () => {
       const profileResponse = await axios.get('http://localhost:8000/api/getProfile', config);
       console.log(profileResponse.data)
       if (profileResponse.data.data.doctor) {
+        console.log(profileResponse.data.data.doctor);
+        const doctorId = profileResponse.data.data.doctor.id; // Adjust the path according to your actual response structure
+        localStorage.setItem('doctorId', doctorId); // Save the doctor id to local storage
         navigate('/doctorDashboard');
       } else if (profileResponse.data.data.student) {
+        console.log(profileResponse.data.data.student);
+        const studentId = profileResponse.data.data.student.id; // Adjust the path according to your actual response structure
+        localStorage.setItem('studentId', studentId); // Save the doctor id to local storage
         navigate('/studentDashboard');
       } else {
         navigate('/userTypeSelect');

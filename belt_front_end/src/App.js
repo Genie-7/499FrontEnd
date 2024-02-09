@@ -13,6 +13,7 @@ import StudentDashboard from './components/StudentDashboard';
 import Logout from './components/Logout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar'; // Ensure this is correctly imported
+import CreateResidencyPositionForm from './components/CreateResidency';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/createStudent" element={<ProtectedRoute><CreateStudent /></ProtectedRoute>} />
           <Route path="/createDoctor" element={<ProtectedRoute><CreateDoctor /></ProtectedRoute>} />
           <Route path="/student/matches" element={<ProtectedRoute><Matches /></ProtectedRoute>} />
+          <Route path="/doctor/position/create" element={<ProtectedRoute><CreateResidencyPositionForm /></ProtectedRoute>} />
           <Route path="*" element={<div>Page not found</div>} />
         </Routes>
       </div>

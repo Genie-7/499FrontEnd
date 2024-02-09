@@ -42,7 +42,8 @@ const CreateStudent = () => {
             console.log(body);
             const response = await axios.post('http://localhost:8000/api/student/create', body, config);
             console.log(response.data); // Handle response, e.g., storing the user token
-            //Get auth token
+            //Get id from response to store in localstorage as doctorId
+
             navigate('/studentDashboard'); // Redirect to another route on success
         } catch (error) {
             console.error(error.response.data); // Handle error

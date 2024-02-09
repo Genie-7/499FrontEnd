@@ -9,8 +9,6 @@
  - let students specify a location preference
 
  Doctors:
- - For doctors, provide a way for them to post new residency positions 
-   (Create Residency position request, optionally can specify class requirements)
  - Let doctors manage/update/delete residency positions
  - Let doctors view applications to these positions
  - Let doctors accept/reject applications
