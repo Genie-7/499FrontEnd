@@ -43,42 +43,54 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="container container-default w-25">
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Name"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Password"
+                        required
+                    />
+                </div>
+                <div className="form-group">
                 <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Name"
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    required
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="Password"
-                    required
-                />
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    value={formData.password_confirmation}
-                    onChange={handleChange}
-                    placeholder="Confirm Password"
-                    required
-                />
-                <button type="submit">Register</button>
+                        type="password"
+                        className="form-control"
+                        name="password_confirmation"
+                        value={formData.password_confirmation}
+                        onChange={handleChange}
+                        placeholder="Confirm Password"
+                        required
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary w-100">Register</button>
             </form>
         </div>
     );

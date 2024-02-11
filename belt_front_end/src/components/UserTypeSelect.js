@@ -11,11 +11,16 @@ const UserTypeSelect = () => {
     };
 
     return (
-        <div>
+        <div className="container container-default w-25">
             <h2>Select Your User Type</h2>
-            <button onClick={() => handleSelectUserType('createDoctor')}>Doctor</button>
-            <br></br>
-            <button onClick={() => handleSelectUserType('createStudent')}>Student</button>
+            <div className="row justify-content-center">
+                <div className="col-sm">
+                    <button className="btn btn-primary w-100" onClick={() => handleSelectUserType('createDoctor')}>Doctor</button>
+                </div>
+                <div className="col-sm">
+                    <button className="btn btn-primary w-100" onClick={() => handleSelectUserType('createStudent')}>Student</button>
+                </div> 
+            </div>          
         </div>
     );
 };

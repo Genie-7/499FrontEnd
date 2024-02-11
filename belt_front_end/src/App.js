@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Matches from './components/Matches';
@@ -18,7 +18,7 @@ import CreateResidencyPositionForm from './components/CreateResidency';
 function App() {
   return (
     <Router>
-      <div>
+      <div className="w-100 h-100 jumbotron d-flex align-items-center" id="content">
         <Navbar />
 
         <Routes>
@@ -27,6 +27,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/studentDashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
           <Route path="/doctorDashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
+          <Route path="/doctor/posting/edit" element={<ProtectedRoute>edit posting</ProtectedRoute>} />
+          <Route path="/doctor/posting/applications" element={<ProtectedRoute>view applications</ProtectedRoute>} />
           <Route path="/userTypeSelect" element={<ProtectedRoute><UserTypeSelect /></ProtectedRoute>} />
           <Route path="/logout" element={<ProtectedRoute><Logout /></ProtectedRoute>} />
           <Route path="/createStudent" element={<ProtectedRoute><CreateStudent /></ProtectedRoute>} />
