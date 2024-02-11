@@ -26,6 +26,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/studentDashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
           <Route path="/doctorDashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
+          <Route path="/doctor/posting/edit" element={<ProtectedRoute>edit posting</ProtectedRoute>} />
+          <Route path="/doctor/posting/applications" element={<ProtectedRoute>view applications</ProtectedRoute>} />
           <Route path="/userTypeSelect" element={<ProtectedRoute><UserTypeSelect /></ProtectedRoute>} />
           <Route path="/logout" element={<ProtectedRoute><Logout /></ProtectedRoute>} />
           <Route path="/createStudent" element={<ProtectedRoute><CreateStudent /></ProtectedRoute>} />
