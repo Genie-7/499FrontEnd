@@ -6,9 +6,9 @@ const ListingElement = (props) => {
 
     const onAction = (toApplicationList) => {
         if (toApplicationList) {
-            navigate('doctor/posting/applications?id=' + props.application_id);
+            navigate('../doctor/posting/applications?id=' + props.application_id);
         } else {
-            navigate('doctor/posting/edit?id=' + props.application_id);
+            navigate('../doctor/posting/edit?id=' + props.application_id);
         }
     };
 

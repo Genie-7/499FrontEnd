@@ -8,6 +8,7 @@ import Register from './components/Register';
 import UserTypeSelect from './components/UserTypeSelect';
 import CreateDoctor from './components/CreateDoctor';
 import DoctorDashboard from './components/DoctorDashboard';
+import EditPosting from './components/EditPosting';
 import CreateStudent from './components/CreateStudent';
 import StudentDashboard from './components/StudentDashboard';
 import Logout from './components/Logout';
@@ -27,7 +28,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/studentDashboard" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
           <Route path="/doctorDashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
-          <Route path="/doctor/posting/edit" element={<ProtectedRoute>edit posting</ProtectedRoute>} />
+          <Route path="/doctor/posting/edit" element={<ProtectedRoute><EditPosting /></ProtectedRoute>} />
           <Route path="/doctor/posting/applications" element={<ProtectedRoute>view applications</ProtectedRoute>} />
           <Route path="/userTypeSelect" element={<ProtectedRoute><UserTypeSelect /></ProtectedRoute>} />
           <Route path="/logout" element={<ProtectedRoute><Logout /></ProtectedRoute>} />
