@@ -90,13 +90,10 @@ const EditPosting = () => {
 
     const handleChange = (e) => {
         if (e.target.name === "letter_of_reccomendation_req") {
-            setFormData({ ...formData, [e.target.name]: e.target.checked });
             setRecommendation(e.target.checked);
         } else if (e.target.name === "research_focused") {
-            setFormData({ ...formData, [e.target.name]: e.target.checked });
             setResearch(e.target.checked);
         } else if (e.target.name === "prefers_new_grads") {
-            setFormData({ ...formData, [e.target.name]: e.target.checked });
             setNewGrads(e.target.checked);
         } else {
             setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -112,7 +109,21 @@ const EditPosting = () => {
             }
         }
 
-        const body = JSON.stringify(formData);
+        const newFormData = {
+            id: formData.id,
+            name: formData.name,
+            status: formData.status,
+            description: formData.description,
+            medical_discipline: formData.medical_discipline,
+            grade_avg_requirement: formData.grade_avg_requirement,
+            letter_of_reccomendation_req: recommendation ? 1 : 0,
+            research_focused: research ? 1 : 0,
+            prefers_new_grads: newGrads ? 1 : 0
+        }
+
+        console.log(newFormData);
+
+        const body = JSON.stringify(newFormData);
         const response = await axios.patch('http://localhost:8000/api/doctor/position/update', body, config);
         console.log(response.data);
     }
