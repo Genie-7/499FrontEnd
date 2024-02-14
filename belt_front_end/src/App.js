@@ -16,6 +16,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar'; // Ensure this is correctly imported
 import CreateResidencyPositionForm from './components/CreateResidency';
 import PositionDetail from './components/PositionDetail'; // The new component you will create
+import SubmitGradeForm from './components/SubmitGradeForm';
+
+// Other imports
 
 function App() {
   return (
@@ -38,6 +41,7 @@ function App() {
           <Route path="/student/matches" element={<ProtectedRoute><Matches /></ProtectedRoute>} />
           <Route path="/position/:id" element={<ProtectedRoute><PositionDetail /></ProtectedRoute>} />
           <Route path="/doctor/position/create" element={<ProtectedRoute><CreateResidencyPositionForm /></ProtectedRoute>} />
+          <Route path="/submitGrade" element={<ProtectedRoute><SubmitGradeForm /></ProtectedRoute>} />
           <Route path="*" element={<div>Page not found</div>} />
         </Routes>
       </div>
