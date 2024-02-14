@@ -4,6 +4,7 @@
  
  Students:
  - They can click into a position for a more detailed view and then from there apply to it.
+    //is matches positions theyre able to apply to or 
  - Let students view applications and their status
  - Let students add relevant classes they've taken
  - let students specify a location preference

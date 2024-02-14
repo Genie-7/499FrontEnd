@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Matches = () => {
@@ -21,7 +22,7 @@ const Matches = () => {
                 const response = await axios.get('http://localhost:8000/api/student/matches', config);
                 // Assuming the response structure matches what your backend sends
                 console.log("API response:", response.data); // Log the response to inspect its structure
-                setMatches(response.data.matches); // Adjust based on the actual response structure
+                setMatches(response.data.data.matches); // Adjust based on the actual response structure
                 setIsLoading(false);
             } catch (err) {
                 console.error("Failed to fetch matches:", err);
@@ -39,15 +40,25 @@ const Matches = () => {
     return (
         <div>
             <h2>Matching Positions</h2>
-            {matches && matches.length > 0 ? (
-                <ul>
+            {matches.length > 0 ? (
+                <div className="matches-list">
                     {matches.map(match => (
-                        <li key={match.residency_position_id}> {/* Adjust key and data as necessary */}
-                            Score: {match.match_score}
-                            {/* Adjust according to your data structure */}
-                        </li>
+                            <Link
+                            to={`/position/${match.id}`} 
+                            key={match.id} 
+                            state={{ position: match }}
+                            className="match-item"
+                            >
+                            <h3>{match.name}</h3>                            
+                            <p><strong>Description:</strong> {match.description}</p>
+                            <p><strong>Medical Discipline:</strong> {match.medical_discipline}</p>
+                            <p><strong>Grade Average Requirement:</strong> {match.grade_avg_requirement}</p>
+                            <p><strong>Letter of Recommendation Required:</strong> {match.letter_of_reccomendation_req ? 'Yes' : 'No'}</p>
+                            <p><strong>Research Focused:</strong> {match.research_focused ? 'Yes' : 'No'}</p>
+                            <p><strong>Prefers New Grads:</strong> {match.prefers_new_grads ? 'Yes' : 'No'}</p>
+                        </Link>
                     ))}
-                </ul>
+                </div>
             ) : (
                 <p>No matches found.</p>
             )}

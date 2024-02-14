@@ -19,7 +19,9 @@ const Logout = () => {
 
       // Clear the token from localStorage
       localStorage.removeItem('authToken');
-      localStorage.removeItem('userId'); // If you're storing the userId, remove it as well
+      localStorage.removeItem('userId'); 
+      localStorage.removeItem('doctorId'); 
+      localStorage.removeItem('studentId'); 
 
       // Redirect user to the login page or home page
       navigate('/login');

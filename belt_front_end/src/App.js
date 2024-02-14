@@ -15,6 +15,7 @@ import Logout from './components/Logout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar'; // Ensure this is correctly imported
 import CreateResidencyPositionForm from './components/CreateResidency';
+import PositionDetail from './components/PositionDetail'; // The new component you will create
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/createStudent" element={<ProtectedRoute><CreateStudent /></ProtectedRoute>} />
           <Route path="/createDoctor" element={<ProtectedRoute><CreateDoctor /></ProtectedRoute>} />
           <Route path="/student/matches" element={<ProtectedRoute><Matches /></ProtectedRoute>} />
+          <Route path="/position/:id" element={<ProtectedRoute><PositionDetail /></ProtectedRoute>} />
           <Route path="/doctor/position/create" element={<ProtectedRoute><CreateResidencyPositionForm /></ProtectedRoute>} />
           <Route path="*" element={<div>Page not found</div>} />
         </Routes>

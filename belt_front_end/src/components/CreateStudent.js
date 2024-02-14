@@ -20,9 +20,12 @@ const CreateStudent = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleRadio = (e) => {
-        formData.prefers_research = e.value;
-    }
+    const handleRadio = (value) => (event) => {
+        setFormData({
+            ...formData,
+            prefers_research: value ? "1" : "0", 
+        });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
