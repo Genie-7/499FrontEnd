@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ListingElement from './ListingElement'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const EditPosting = () => {
@@ -9,7 +9,6 @@ const EditPosting = () => {
     const [formData, setFormData] = useState({
         id: 0,
         name: '',
-        status: '',
         description: '',
         medical_discipline: '',
         grade_avg_requirement: 0.0,
@@ -20,6 +19,8 @@ const EditPosting = () => {
     const [recommendation, setRecommendation] = useState(false);
     const [research, setResearch] = useState(false);
     const [newGrads, setNewGrads] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const LoadInformation = async () => {
@@ -65,7 +66,6 @@ const EditPosting = () => {
                         setFormData({
                             id: position.id,
                             name: position.name,
-                            status: position.status,
                             description: position.description,
                             medical_discipline: position.medical_discipline,
                             grade_avg_requirement: position.grade_avg_requirement,
@@ -112,7 +112,6 @@ const EditPosting = () => {
         const newFormData = {
             id: formData.id,
             name: formData.name,
-            status: formData.status,
             description: formData.description,
             medical_discipline: formData.medical_discipline,
             grade_avg_requirement: formData.grade_avg_requirement,
@@ -128,9 +127,25 @@ const EditPosting = () => {
         console.log(response.data);
     }
 
-    const handleDelete = async () => {
-        if (window.confirm("Are you sure you want to delete this posting?")) {
-            
+    const handleClose = async () => {
+        if (window.confirm("Are you sure you want to close this posting?")) {
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                    'Accept': 'application/vnd.api+json',
+                    'Content-Type': 'application/vnd.api+json'
+                },
+
+                params: {
+                    "id": posting_id
+                }
+            }
+
+            const response = await axios.post('http://localhost:8000/api/doctor/position/close', null, config);
+
+            if (response.data.status === "Request was successful") {
+                navigate("../../doctorDashboard");
+            }
         }
     }
 
@@ -144,16 +159,6 @@ const EditPosting = () => {
                         className="form-control"
                         name="name"
                         value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="status"
-                        value={formData.status}
                         onChange={handleChange}
                         required
                     />
@@ -217,7 +222,7 @@ const EditPosting = () => {
                     <label className="form-check-label" htmlFor="prefers_new_grads">Prefer new graduates</label>
                 </div>
                 <button type="button" className="btn btn-primary w-50" onClick={handleSubmit}>Update</button>
-                <button className="btn btn-danger w-50" onClick={handleDelete}>Delete</button>
+                <button type="button" className="btn btn-danger w-50" onClick={handleClose}>Close Posting</button>
             </form>
         </div>
     );

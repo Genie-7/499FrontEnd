@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import ListingElement from './ListingElement'
 import axios from 'axios';
 
 const DoctorDashboard = () => {
     const [displayedPositions, updateDisplayedPositions] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const LoadPositions = async () => {
@@ -46,9 +48,9 @@ const DoctorDashboard = () => {
                                 exists = true;
                                 break;
                             }
-                        } 
+                        }
     
-                        if (!exists) {
+                        if (!exists && positions[i].status === "OPEN") {
                             tmp.push({
                                 "id": positions[i].id,
                                 "name": positions[i].name,
@@ -70,16 +72,20 @@ const DoctorDashboard = () => {
         LoadPositions();
     });
 
+    const newPosting = () => {
+        navigate("../doctor/position/create");
+    }
+
     return(
         <div className="w-75 h-100 container container-default">
             <h1>Dashboard</h1>
-            <button className="btn btn-success btn-trim mb-4">New Posting</button>
+            <button className="btn btn-success btn-trim mb-4" onClick={newPosting}>New Posting</button>
             <ul className="list-group bg-light overflow-auto">
                 {displayedPositions.map((position, i) => (
-                    <ListingElement name={position.name} application_id={position.id} key = {i}/>
+                    <ListingElement name={position.name} application_id={position.id} key={i}/>
                 ))}
             </ul>
-        </div>   
+        </div>
     )
 }
 
