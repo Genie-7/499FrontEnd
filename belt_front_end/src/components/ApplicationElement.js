@@ -2,11 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ApplicationElement = (props) => {
-    console.log(props.status);
     const navigate = useNavigate();
 
     const onAction = () => {
-        navigate('../doctor/posting/applications/view?id=' + props.application_id);
+        navigate('../doctor/posting/applications/view?id=' + props.application_id + "&posting_id=" + props.posting_id);
     };
 
     return(

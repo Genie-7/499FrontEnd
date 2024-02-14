@@ -86,8 +86,6 @@ const ApplicationList = () => {
         }
 
         LoadApplications();
-
-        console.log(displayedApplications);
     });
 
     return(
@@ -95,7 +93,7 @@ const ApplicationList = () => {
             <h1>Applications</h1>
             <ul className="list-group bg-light overflow-auto">
                 {displayedApplications.map((application, i) => (
-                    <ApplicationElement name={application.student} application_id={application.id} status={application.status} key={i}/>
+                    <ApplicationElement name={application.student} application_id={application.id} posting_id={posting_id} status={application.status} key={i}/>
                 ))}
             </ul>
         </div>
@@ -103,9 +101,3 @@ const ApplicationList = () => {
 }
 
 export default ApplicationList;
-
-/*
-{displayedApplications.map((position, i) => (
-                    <ApplicationElement name={position.name} application_id={position.id} key={i}/>
-                ))}
-*/
