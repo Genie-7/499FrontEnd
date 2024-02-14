@@ -1,15 +1,15 @@
   In General:
- - Dashboard for students and doctors
- - Nav
+ - Dashboards for students and doctors including more feature previews 
+ - Make Nav for doctors and students respectively + add some type specific routes
+ - Make entire site look better (clean up UI components)
+ - seeder for medical institutions
  
  Students:
- - They can click into a position for a more detailed view and then from there apply to it.
-    //is matches positions theyre able to apply to or 
- - Let students view applications and their status
- - Let students add relevant classes they've taken
  - let students specify a location preference
+ - get all grades route
+ - specify location preferences
 
  Doctors:
- - Let doctors manage/update/delete residency positions
- - Let doctors view applications to these positions
+ - Let doctors manage/update/delete residency positions IN PROGRESS
  - Let doctors accept/reject applications
+ -

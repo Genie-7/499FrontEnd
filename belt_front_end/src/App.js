@@ -18,6 +18,8 @@ import Navbar from './components/Navbar'; // Ensure this is correctly imported
 import CreateResidencyPositionForm from './components/CreateResidency';
 import PositionDetail from './components/PositionDetail'; // The new component you will create
 import SubmitGradeForm from './components/SubmitGradeForm';
+import AllApplications from './components/AllApplications';
+
 
 // Other imports
 
@@ -43,6 +45,7 @@ function App() {
           <Route path="/position/:id" element={<ProtectedRoute><PositionDetail /></ProtectedRoute>} />
           <Route path="/doctor/position/create" element={<ProtectedRoute><CreateResidencyPositionForm /></ProtectedRoute>} />
           <Route path="/submitGrade" element={<ProtectedRoute><SubmitGradeForm /></ProtectedRoute>} />
+          <Route path="/student/applications/all" element={<ProtectedRoute><AllApplications /></ProtectedRoute>} />
           <Route path="*" element={<div>Page not found</div>} />
         </Routes>
       </div>
