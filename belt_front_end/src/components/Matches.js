@@ -18,10 +18,7 @@ const Matches = () => {
 
         const fetchMatches = async () => {
             try {
-                // Updated to use the correct endpoint and removed the studentId query parameter
                 const response = await axios.get('http://localhost:8000/api/student/matches', config);
-                // Assuming the response structure matches what your backend sends
-                console.log("API response:", response.data); // Log the response to inspect its structure
                 setMatches(response.data.data.matches); // Adjust based on the actual response structure
                 setIsLoading(false);
             } catch (err) {
@@ -34,31 +31,49 @@ const Matches = () => {
         fetchMatches();
     }, []);
 
-    if (isLoading) return <div>Loading matches...</div>;
-    if (error) return <div>{error}</div>;
+    // Styles
+    const titleStyle = {
+        textAlign: 'center',
+        marginTop: '20px',
+        marginBottom: '40px',
+    };
+
+    const matchesContainerStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    };
+
+    const matchItemStyle = {
+        textAlign: 'left',
+        margin: '10px',
+        padding: '20px',
+        borderRadius: '10px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+        width: '80%',
+        maxWidth: '600px',
+        textDecoration: 'none', // Remove underline from links
+    };
+
+    if (isLoading) return <div style={matchesContainerStyle}>Loading matches...</div>;
+    if (error) return <div style={matchesContainerStyle}>{error}</div>;
 
     return (
-        <div>
-            <h2>Matching Positions</h2>
+        <div style={matchesContainerStyle}>
+            <h2 style={titleStyle}>Matching Positions</h2>
             {matches.length > 0 ? (
-                <div className="matches-list">
-                    {matches.map(match => (
-                            <Link
-                            to={`/position/${match.id}`} 
-                            key={match.id} 
-                            state={{ position: match }}
-                            className="match-item"
-                            >
-                            <h3>{match.name}</h3>                            
-                            <p><strong>Description:</strong> {match.description}</p>
-                            <p><strong>Medical Discipline:</strong> {match.medical_discipline}</p>
-                            <p><strong>Grade Average Requirement:</strong> {match.grade_avg_requirement}</p>
-                            <p><strong>Letter of Recommendation Required:</strong> {match.letter_of_reccomendation_req ? 'Yes' : 'No'}</p>
-                            <p><strong>Research Focused:</strong> {match.research_focused ? 'Yes' : 'No'}</p>
-                            <p><strong>Prefers New Grads:</strong> {match.prefers_new_grads ? 'Yes' : 'No'}</p>
-                        </Link>
-                    ))}
-                </div>
+                matches.map(match => (
+                    <Link to={`/position/${match.id}`} key={match.id} state={{ position: match }} style={matchItemStyle}>
+                        <h3>{match.name}</h3>
+                        <p><strong>Description:</strong> {match.description}</p>
+                        <p><strong>Medical Discipline:</strong> {match.medical_discipline}</p>
+                        <p><strong>Grade Average Requirement:</strong> {match.grade_avg_requirement}</p>
+                        <p><strong>Letter of Recommendation Required:</strong> {match.letter_of_reccomendation_req ? 'Yes' : 'No'}</p>
+                        <p><strong>Research Focused:</strong> {match.research_focused ? 'Yes' : 'No'}</p>
+                        <p><strong>Prefers New Grads:</strong> {match.prefers_new_grads ? 'Yes' : 'No'}</p>
+                    </Link>
+                ))
             ) : (
                 <p>No matches found.</p>
             )}

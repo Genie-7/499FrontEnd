@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Fixed import
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ const PositionDetail = () => {
     const position = location.state.position;
     const navigate = useNavigate();
 
-    const [applicationMessage, setApplicationMessage] = useState(''); // Now correctly importing useState
+    const [applicationMessage, setApplicationMessage] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -28,11 +28,9 @@ const PositionDetail = () => {
                 },
             });
             setSuccess('Application submitted successfully.');
-            setTimeout(() => {
-                navigate('/student/matches');
-            }, 3000);
+            setTimeout(() => navigate('/student/matches'), 3000);
         } catch (error) {
-            setError(error.response && error.response.data.message ? error.response.data.message : 'An error occurred while applying for the position.');
+            setError(error.response?.data?.message || 'An error occurred while applying for the position.');
         }
     };
 
@@ -42,33 +40,50 @@ const PositionDetail = () => {
         return date.toLocaleDateString();
     };
 
+    // Styles
+    const titleStyle = {
+        textAlign: 'center',
+        margin: '20px 0',
+    };
+
+    const detailStyle = {
+        maxWidth: '600px',
+        margin: 'auto',
+        padding: '20px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+        borderRadius: '10px',
+    };
+
     return (
-        <div>
+        <div style={{ padding: '20px' }}>
             {position ? (
-                <div>
-                    <h2>{position.name}</h2>
-                    <p>Status: {position.status}</p>
-                    <p>Description: {position.description}</p>
-                    <p>Medical Discipline: {position.medical_discipline}</p>
-                    <p>Doctor Id: {position.doctor_id}</p>
-                    <p>Medical Institution Id: {position.medical_institution_id}</p>
-                    <p>Grade Average Requirement: {position.grade_avg_requirement}</p>
-                    <p>Letter of Recommendation Required: {position.letter_of_reccomendation_req ? 'Yes' : 'No'}</p>
-                    <p>Research Focused:{position.research_focused ? 'Yes' : 'No'}</p>
-                    <p>Prefers New Grads: {position.prefers_new_grads ? 'Yes' : 'No'}</p>
-                    <p>Created At: {formatDate(position.created_at)}</p>
-                    <p>Updated At: {formatDate(position.updated_at)}</p>
-                    {success && <p style={{ color: 'green' }}>{success}</p>}
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                <div style={detailStyle}>
+                    <h2 style={titleStyle}>{position.name}</h2>
+                    <p><strong>Status:</strong> {position.status}</p>
+                    <p><strong>Description:</strong> {position.description}</p>
+                    <p><strong>Medical Discipline:</strong> {position.medical_discipline}</p>
+                    <p><strong>Doctor Id:</strong> {position.doctor_id}</p>
+                    <p><strong>Medical Institution Id:</strong> {position.medical_institution_id}</p>
+                    <p><strong>Grade Average Requirement:</strong> {position.grade_avg_requirement}</p>
+                    <p><strong>Letter of Recommendation Required:</strong> {position.letter_of_reccomendation_req ? 'Yes' : 'No'}</p>
+                    <p><strong>Research Focused:</strong> {position.research_focused ? 'Yes' : 'No'}</p>
+                    <p><strong>Prefers New Grads:</strong> {position.prefers_new_grads ? 'Yes' : 'No'}</p>
+                    <p><strong>Created At:</strong> {formatDate(position.created_at)}</p>
+                    <p><strong>Updated At:</strong> {formatDate(position.updated_at)}</p>
+                    {success && <div style={{ color: 'green', textAlign: 'center' }}>{success}</div>}
+                    {error && <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>}
                     <form onSubmit={handleApply}>
-                        <label htmlFor="applicationMessage">Application Message:</label>
-                        <textarea
-                            id="applicationMessage"
-                            value={applicationMessage}
-                            onChange={(e) => setApplicationMessage(e.target.value)}
-                            required
-                        ></textarea>
-                        <button type="submit">Apply to Position</button>
+                        <div style={{ marginTop: '20px' }}>
+                            <label htmlFor="applicationMessage"><strong>Application Message:</strong></label>
+                            <textarea
+                                id="applicationMessage"
+                                style={{ display: 'block', width: '100%', padding: '10px', marginTop: '10px' }}
+                                value={applicationMessage}
+                                onChange={(e) => setApplicationMessage(e.target.value)}
+                                required
+                            ></textarea>
+                        </div>
+                        <button type="submit" style={{ marginTop: '10px', display: 'block', width: '100%' }}>Apply to Position</button>
                     </form>
                 </div>
             ) : (

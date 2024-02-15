@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom';
 
 const CreateResidencyPositionForm = () => {
-
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -13,10 +12,9 @@ const CreateResidencyPositionForm = () => {
         letter_of_reccomendation_req: false,
         research_focused: false,
         prefers_new_grads: false,
-        medical_institution_id: '', // Assuming the doctor selects from existing institutions
+        medical_institution_id: '',
     });
-    const [error, setError] = useState(''); // State to manage error messages
-    const [success, setSuccess] = useState(''); // State to manage success messages
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -38,66 +36,105 @@ const CreateResidencyPositionForm = () => {
         };
 
         try {
-            // Replace URL with your actual endpoint
             const response = await axios.post('http://localhost:8000/api/doctor/position/create', formData, config);
             console.log('Residency Position Created:', response.data);
-            setSuccess('Residency position created successfully.'); // Set success message
-            // Handle success (e.g., displaying a success message, redirecting, etc.)
-            setTimeout(() => {
-                navigate('/doctorDashboard'); // Redirect to the doctor dashboard after showing the success message
-            }, 3000); // Delay for 3 seconds before redirecting
+            navigate('/doctorDashboard');
         } catch (error) {
             console.error('Error creating residency position:', error.response.data);
-            // Handle error (e.g., displaying an error message)
             setError(error.response && error.response.data.message ? error.response.data.message : 'An error occurred while creating the position.');
         }
     };
 
     return (
-        <div>
-            <h2>Create Residency Position</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
-            {success && <p style={{ color: 'green' }}>{success}</p>} {/* Display success message */}
+        <div className="container mt-5">
+            <h2 className="mb-4">Create Residency Position</h2>
+            {error && <p className="text-danger">{error}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name:</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                <div className="mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Name"
+                        required
+                    />
                 </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea name="description" value={formData.description} onChange={handleChange} required></textarea>
+                <div className="mb-3">
+                    <textarea
+                        className="form-control"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder="Description"
+                        required
+                    />
                 </div>
-                <div>
-                    <label>Medical Discipline:</label>
-                    <input type="text" name="medical_discipline" value={formData.medical_discipline} onChange={handleChange} required />
+                <div className="mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="medical_discipline"
+                        value={formData.medical_discipline}
+                        onChange={handleChange}
+                        placeholder="Medical Discipline"
+                        required
+                    />
                 </div>
-                <div>
-                    <label>Grade Average Requirement:</label>
-                    <input type="number" name="grade_avg_requirement" value={formData.grade_avg_requirement} onChange={handleChange} required />
+                <div className="mb-3">
+                    <input
+                        type="number"
+                        className="form-control"
+                        name="grade_avg_requirement"
+                        value={formData.grade_avg_requirement}
+                        onChange={handleChange}
+                        placeholder="Grade Average Requirement"
+                        required
+                    />
                 </div>
-                <div>
-                    <label>
-                        Letter of Recommendation Required?
-                        <input type="checkbox" name="letter_of_reccomendation_req" checked={formData.letter_of_reccomendation_req} onChange={handleChange} />
-                    </label>
+                <div className="mb-3 form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="letter_of_reccomendation_req"
+                        checked={formData.letter_of_reccomendation_req}
+                        onChange={handleChange}
+                    />
+                    <label className="form-check-label">Letter of Recommendation Required</label>
                 </div>
-                <div>
-                    <label>
-                        Research Focused?
-                        <input type="checkbox" name="research_focused" checked={formData.research_focused} onChange={handleChange} />
-                    </label>
+                <div className="mb-3 form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="research_focused"
+                        checked={formData.research_focused}
+                        onChange={handleChange}
+                    />
+                    <label className="form-check-label">Research Focused</label>
                 </div>
-                <div>
-                    <label>
-                        Prefers New Grads?
-                        <input type="checkbox" name="prefers_new_grads" checked={formData.prefers_new_grads} onChange={handleChange} />
-                    </label>
+                <div className="mb-3 form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="prefers_new_grads"
+                        checked={formData.prefers_new_grads}
+                        onChange={handleChange}
+                    />
+                    <label className="form-check-label">Prefers New Grads</label>
                 </div>
-                <div>
-                    <label>Medical Institution ID:</label>
-                    <input type="number" name="medical_institution_id" value={formData.medical_institution_id} onChange={handleChange} required />
+                <div className="mb-3">
+                    <input
+                        type="number"
+                        className="form-control"
+                        name="medical_institution_id"
+                        value={formData.medical_institution_id}
+                        onChange={handleChange}
+                        placeholder="Medical Institution ID"
+                        required
+                    />
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className="btn btn-primary w-100">Create Residency</button>
             </form>
         </div>
     );
