@@ -71,9 +71,18 @@ export const AuthProvider = ({ children }) => {
     setUserType(null);
     navigate('/login');
     };
+  
+  const postRegister = async () => {
+    let id = localStorage.getItem("doctorId");
+    if (id != null) {
+      setUserType("doctor");
+    } else {
+      setUserType("student");
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ authToken, userType, login, logout }}>
+    <AuthContext.Provider value={{ authToken, userType, login, logout, postRegister }}>
       {children}
     </AuthContext.Provider>
   );
