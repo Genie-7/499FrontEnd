@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const AuthContext = createContext(null);
@@ -8,6 +9,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
   const [userType, setUserType] = useState(null); // Add userType to manage different user roles
+  const navigate = useNavigate();
 
   const login = async (email, password, navigate) => {
     try {
@@ -67,6 +69,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('studentId');
     setAuthToken(null);
     setUserType(null);
+    navigate('/login');
     };
 
   return (
