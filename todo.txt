@@ -8,6 +8,8 @@
     4.Create residency DONE L
  
  Students:
+ -ON create student nav doesnt update
+
  - get all grades route
  - specify location preferences
 

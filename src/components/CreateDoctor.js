@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,8 +11,26 @@ const CreateDoctor = () => {
         medical_discipline: '',
         user_id: ''
     });
-
+    const [medicalInstitutions, setMedicalInstitutions] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchMedicalInstitutions = async () => {
+            try {
+                const response = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/medical_institutions', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/json'
+                    },
+                });
+                setMedicalInstitutions(response.data.data.institutions);
+            } catch (error) {
+                console.error('Failed to fetch medical institutions:', error);
+            }
+        };
+        fetchMedicalInstitutions();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,15 +91,21 @@ const CreateDoctor = () => {
                     </select>
                 </div>
                 <div className="mb-3">
-                    <input
-                        type="number"
-                        className="form-control"
+                    <label>Medical Institution:</label>
+                    <select
+                        className="form-select"
                         name="medical_institution_id"
                         value={formData.medical_institution_id}
                         onChange={handleChange}
-                        placeholder="Medical Institution ID"
                         required
-                    />
+                    >
+                        <option value="">Select Medical Institution</option>
+                        {medicalInstitutions.map((institution) => (
+                            <option key={institution.id} value={institution.id}>
+                                {institution.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-3">
                     <input
@@ -101,3 +125,4 @@ const CreateDoctor = () => {
 };
 
 export default CreateDoctor;
+
