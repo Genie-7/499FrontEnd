@@ -17,8 +17,11 @@
   color: #61dafb;
 }
 
+html{
+  padding-top: 56px;
+}
+
 body {
-  padding-top: 56px; /* Adjust based on the actual height of your navbar */
   height: 100vh;
 }
 
@@ -37,3 +40,5 @@ body {
 h1, h2 {
   text-align: center;
 }
+
+

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import './bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './services/AuthProvider';
 import LoginPage from './components/LoginPage';
 import Matches from './components/Matches';
 import Register from './components/Register';
@@ -28,6 +29,7 @@ import AllApplications from './components/AllApplications';
 
 function App() {
   return (
+  <AuthProvider>
     <Router>
       <div className="w-100 h-100 jumbotron d-flex align-items-center" id="content">
         <Navbar />
@@ -54,6 +56,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 

@@ -5,11 +5,9 @@
  - seeder for medical institutions
  
  Students:
- - let students specify a location preference
  - get all grades route
  - specify location preferences
 
  Doctors:
  - Let doctors manage/update/delete residency positions IN PROGRESS
  - Let doctors accept/reject applications
- -
