@@ -34,19 +34,37 @@ const AllApplications = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div>
+        <div className="container mt-4">
             <h2>My Applications</h2>
             {applications.length > 0 ? (
-                <ul>
+                <ul className="list-group">
                     {applications.map(application => (
-                        <li key={application.id}>
-                            Position ID: {application.residency_position_id}, Message: {application.message}
-                            {/* Display other application details as needed */}
+                        <li key={application.id} className="list-group-item">
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <strong>Title:</strong> {application.residency_position.name}
+                                </div>
+                                <div className="col-md-2">
+                                    <strong>Status:</strong> {application.residency_position.status}
+                                </div>
+                                <div className="col-md-3">
+                                    <strong>Description:</strong> {application.residency_position.description}
+                                </div>
+                                <div className="col-md-2">
+                                    <strong>Doctor ID:</strong> {application.residency_position.doctor_id}
+                                </div>
+                                <div className="col-md-2">
+                                    <strong>Medical Institution ID:</strong> {application.residency_position.medical_institution_id}
+                                </div>
+                            </div>
+                            <div className="mt-2">
+                                <strong>Message:</strong> {application.message}
+                            </div>
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p>No applications found.</p>
+                <p className="text-muted">No applications found.</p>
             )}
         </div>
     );

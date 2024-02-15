@@ -1,11 +1,11 @@
   In General:
  - Dashboards for students and doctors including more feature previews 
  - Make entire site look better (clean up UI components)
-    1.Create doctor
-    2.Matches
+    1.Create doctor DONE L
+    2.Matches DONE B
+    2.5 Applications
     3.Apply to Matches(PosDetails)
-    4.Create residency
- - seeder for medical institutions
+    4.Create residency DONE L
  
  Students:
  - get all grades route

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
-import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext(null);
 
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = async ( navigate ) => {
+  const logout = async () => {
     try {
       // Make an API call to logout
       await axios.post('http://localhost:8000/api/logout', {}, {

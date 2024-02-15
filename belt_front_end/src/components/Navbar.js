@@ -9,7 +9,7 @@ const Navbar = () => {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">MyApp</Link>
+          <Link className="navbar-brand" to="/">BELT RMS</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -33,9 +33,9 @@ const Navbar = () => {
                   <li className="nav-item">
                     <Link className="nav-link" to="/submitGrade">Add Grade</Link>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <Link className="nav-link" to="/student/applications/all">Applications</Link>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <Link className="nav-link" to="/student/matches">Matches</Link>
                   </li>
