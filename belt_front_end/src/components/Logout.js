@@ -12,7 +12,7 @@ const Logout = () => {
 
   useEffect(() => {
     // Directly call the logout function which now includes the API call
-    const performLogout = async () => {
+    const performLogout = async (  ) => {
       await logout();
     };
 
