@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useAuth } from '../services/AuthProvider';
 
 const CreateStudent = () => {
     const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ const CreateStudent = () => {
         prefers_research: false,
         user_id: 0
     });
+
+    const {postRegister} = useAuth();
 
     const navigate = useNavigate(); // Initialize useNavigate
 
@@ -47,6 +50,7 @@ const CreateStudent = () => {
             console.log(response.data); // Handle response, e.g., storing the user token
             //Get id from response to store in localstorage as doctorId
             localStorage.setItem('studentId', response.data.data.student.id);
+            postRegister();
             navigate('/studentDashboard'); // Redirect to another route on success
         } catch (error) {
             console.error(error.response.data); // Handle error
@@ -137,7 +141,7 @@ const CreateStudent = () => {
                                 id="prefers_research_yes"
                                 onChange={handleRadio(true)}
                             />
-                            <label className="form-check-label" for="prefers_research_yes">Yes</label>
+                            <label className="form-check-label" htmlFor="prefers_research_yes">Yes</label>
                         </div>
                         <div className="col-sm-10">
                             <input
@@ -149,7 +153,7 @@ const CreateStudent = () => {
                                 onChange={handleRadio(false)}
                                 checked
                             />
-                            <label className="form-check-label" for="prefers_research_no">No</label>
+                            <label className="form-check-label" htmlFor="prefers_research_no">No</label>
                         </div>
                     </div>
                 </fieldset>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../services/AuthProvider';
 
 const CreateDoctor = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const CreateDoctor = () => {
         medical_discipline: '',
         user_id: ''
     });
+
+    const {postRegister} = useAuth();
 
     const navigate = useNavigate();
 
@@ -33,6 +36,7 @@ const CreateDoctor = () => {
             const body = JSON.stringify(formData);
             const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/create', body, config);
             localStorage.setItem('doctorId', response.data.data.doctor.id);
+            postRegister();
             navigate('/doctorDashboard');
         } catch (error) {
             console.error(error.response.data);
