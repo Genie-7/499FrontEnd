@@ -33,7 +33,7 @@ const EditPosting = () => {
                     }
                 }
     
-                const doctorResponse = await axios.get('http://localhost:8000/api/getProfile', config1);
+                const doctorResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/getProfile', config1);
                 const myDoctor = doctorResponse.data.data.doctor;
     
                 const config2 = {
@@ -48,7 +48,7 @@ const EditPosting = () => {
                     }
                 }
     
-                const applicationResponse = await axios.get('http://localhost:8000/api/doctor/positions/all', config2);
+                const applicationResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/positions/all', config2);
                 const data = applicationResponse.data;
 
                 if (data.status === "Request was successful") {
@@ -123,7 +123,7 @@ const EditPosting = () => {
         console.log(newFormData);
 
         const body = JSON.stringify(newFormData);
-        const response = await axios.patch('http://localhost:8000/api/doctor/position/update', body, config);
+        const response = await axios.patch('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/position/update', body, config);
         console.log(response.data);
     }
 
@@ -141,7 +141,7 @@ const EditPosting = () => {
                 }
             }
 
-            const response = await axios.post('http://localhost:8000/api/doctor/position/close', null, config);
+            const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/position/close', null, config);
 
             if (response.data.status === "Request was successful") {
                 navigate("../../doctorDashboard");

@@ -36,7 +36,7 @@ const CreateResidencyPositionForm = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8000/api/doctor/position/create', formData, config);
+            const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/position/create', formData, config);
             console.log('Residency Position Created:', response.data);
             navigate('/doctorDashboard');
         } catch (error) {

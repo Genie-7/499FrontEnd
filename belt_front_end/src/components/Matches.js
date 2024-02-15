@@ -18,7 +18,7 @@ const Matches = () => {
 
         const fetchMatches = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/student/matches', config);
+                const response = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/matches', config);
                 setMatches(response.data.data.matches); // Adjust based on the actual response structure
                 setIsLoading(false);
             } catch (err) {

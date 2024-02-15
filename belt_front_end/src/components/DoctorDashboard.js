@@ -18,7 +18,7 @@ const DoctorDashboard = () => {
                     }
                 }
     
-                const doctorResponse = await axios.get('http://localhost:8000/api/getProfile', config1);
+                const doctorResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/getProfile', config1);
                 const myDoctor = doctorResponse.data.data.doctor;
     
                 const config2 = {
@@ -33,7 +33,7 @@ const DoctorDashboard = () => {
                     }
                 }
     
-                const applicationResponse = await axios.get('http://localhost:8000/api/doctor/positions/all', config2);
+                const applicationResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/positions/all', config2);
                 const data = applicationResponse.data;
     
                 if (data.status === "Request was successful") {

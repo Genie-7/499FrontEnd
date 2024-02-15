@@ -5,7 +5,7 @@ const StudentRoute = ({ children }) => {
     const navigate = useNavigate();
 
     const getUserInfo = async () => {
-        const profileResponse = await axios.get('http://localhost:8000/api/getProfile', {
+        const profileResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/getProfile', {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Assume the token is stored in localStorage
                 'Accept': 'application/vnd.api+json',

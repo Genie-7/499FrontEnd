@@ -26,7 +26,7 @@ const Register = () => {
             };
             // Adjust the URL as necessary for your API endpoint
             const body = JSON.stringify(formData);
-            const response = await axios.post('http://localhost:8000/api/register', body, config);
+            const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/register', body, config);
             console.log(response.data); // Handle response, e.g., storing the user token
             //Get auth token
             // Extract the token from the response and store it in local storage

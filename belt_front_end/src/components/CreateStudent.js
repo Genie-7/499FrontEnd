@@ -43,7 +43,7 @@ const CreateStudent = () => {
             formData.user_id = parseInt(localStorage.getItem("userId"));
             const body = JSON.stringify(formData);
             console.log(body);
-            const response = await axios.post('http://localhost:8000/api/student/create', body, config);
+            const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/create', body, config);
             console.log(response.data); // Handle response, e.g., storing the user token
             //Get id from response to store in localstorage as doctorId
 

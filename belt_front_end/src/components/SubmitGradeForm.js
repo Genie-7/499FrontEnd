@@ -23,7 +23,7 @@ const SubmitGradeForm = () => {
         e.preventDefault();
         const authToken = localStorage.getItem('authToken');
         try {
-            await axios.post('http://localhost:8000/api/student/grade/create', formData, {
+            await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/grade/create', formData, {
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
                     'Content-Type': 'application/json',

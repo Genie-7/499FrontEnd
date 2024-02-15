@@ -12,7 +12,7 @@ const AllApplications = () => {
             try {
                 // Assuming you store your authToken in localStorage
                 const authToken = localStorage.getItem('authToken');
-                const response = await axios.get('http://localhost:8000/api/student/applications/all', {
+                const response = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/applications/all', {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                         'Accept': 'application/vnd.api+json',

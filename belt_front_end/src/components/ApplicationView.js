@@ -20,7 +20,7 @@ const ApplicationView = () => {
     useEffect(() => {
         const LoadApplication = async () => {
             try {
-                const applicationResponse = await axios.get('http://localhost:8000/api/doctor/position/applications', {
+                const applicationResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/position/applications', {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
                         'Accept': 'application/vnd.api+json',
@@ -46,7 +46,7 @@ const ApplicationView = () => {
                     }
 
                     if (application != null) {
-                        const studentResponse = await axios.get('http://localhost:8000/api/student/', {
+                        const studentResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/', {
                             headers: {
                                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
                                 'Accept': 'application/vnd.api+json',
@@ -63,7 +63,7 @@ const ApplicationView = () => {
                         if (studentData.status === "Request was successful") {
                             const student = studentData.data.student;
 
-                            const gradesResponse = await axios.get('http://localhost:8000/api/student/grades', {
+                            const gradesResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/grades', {
                                 headers: {
                                     'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
                                     'Accept': 'application/vnd.api+json',
@@ -113,7 +113,7 @@ const ApplicationView = () => {
     }, []);
 
     const handleAction = async (accept) => {
-        let apiUrl = 'http://localhost:8000/api/doctor/application/' + (accept ? "accept" : "reject");
+        let apiUrl = 'http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/application/' + (accept ? "accept" : "reject");
 
         const response = await axios.post(apiUrl, null, {
             headers: {

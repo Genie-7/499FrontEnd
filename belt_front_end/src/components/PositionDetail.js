@@ -16,7 +16,7 @@ const PositionDetail = () => {
         const studentId = localStorage.getItem('studentId');
 
         try {
-            await axios.post('http://localhost:8000/api/student/apply', {
+            await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/apply', {
                 student_id: studentId,
                 residency_position_id: position.id,
                 message: applicationMessage,

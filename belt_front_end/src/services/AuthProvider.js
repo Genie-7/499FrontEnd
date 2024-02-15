@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, navigate) => {
     try {
-      const response = await axios.post('http://localhost:8000/api/login', {
+      const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/login', {
         email,
         password,
       });
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
 
       // Directly determine user type after login
       // Note: You might want to adjust this based on how you manage user roles
-      const profileResponse = await axios.get('http://localhost:8000/api/getProfile', {
+      const profileResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/getProfile', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/vnd.api+json',
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       // Make an API call to logout
-      await axios.post('http://localhost:8000/api/logout', {}, {
+      await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/logout', {}, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         },

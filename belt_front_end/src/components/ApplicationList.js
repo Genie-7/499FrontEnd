@@ -24,7 +24,7 @@ const ApplicationList = () => {
                     }
                 }
     
-                const applicationResponse = await axios.get('http://localhost:8000/api/doctor/position/applications', config);
+                const applicationResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/position/applications', config);
                 const data = applicationResponse.data;
 
                 if (data.status === "Request was successful") {
@@ -56,7 +56,7 @@ const ApplicationList = () => {
                                 }
                             }
 
-                            const studentResponse = await axios.get('http://localhost:8000/api/student/', config2);
+                            const studentResponse = await axios.get('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/', config2);
                             const studentData = studentResponse.data;
 
                             if (studentData.status === "Request was successful") {
