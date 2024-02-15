@@ -1,7 +1,10 @@
   In General:
  - Dashboards for students and doctors including more feature previews 
- - Make Nav for doctors and students respectively + add some type specific routes
  - Make entire site look better (clean up UI components)
+    1.Create doctor
+    2.Matches
+    3.Apply to Matches(PosDetails)
+    4.Create residency
  - seeder for medical institutions
  
  Students:
@@ -9,5 +12,4 @@
  - specify location preferences
 
  Doctors:
- - Let doctors manage/update/delete residency positions IN PROGRESS
  - Let doctors accept/reject applications
