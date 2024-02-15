@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = async () => {
+  const logout = async ( navigate ) => {
     try {
       // Make an API call to logout
       await axios.post('http://localhost:8000/api/logout', {}, {
