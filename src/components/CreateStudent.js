@@ -46,7 +46,7 @@ const CreateStudent = () => {
             const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/student/create', body, config);
             console.log(response.data); // Handle response, e.g., storing the user token
             //Get id from response to store in localstorage as doctorId
-
+            localStorage.setItem('studentId', response.data.data.student.id);
             navigate('/studentDashboard'); // Redirect to another route on success
         } catch (error) {
             console.error(error.response.data); // Handle error

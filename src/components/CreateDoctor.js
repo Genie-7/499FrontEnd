@@ -31,7 +31,8 @@ const CreateDoctor = () => {
             formData.medical_institution_id = parseInt(formData.medical_institution_id);
             formData.user_id = parseInt(localStorage.getItem("userId"));
             const body = JSON.stringify(formData);
-            await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/create', body, config);
+            const response = await axios.post('http://comp-4990-actual-api-env.eba-pfzutxd5.us-east-2.elasticbeanstalk.com/api/doctor/create', body, config);
+            localStorage.setItem('doctorId', response.data.data.doctor.id);
             navigate('/doctorDashboard');
         } catch (error) {
             console.error(error.response.data);
