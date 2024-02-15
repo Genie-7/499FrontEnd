@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-//import useNavigate from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const ApplicationView = () => {
@@ -15,7 +15,7 @@ const ApplicationView = () => {
         status: ''
     });
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const LoadApplication = async () => {
@@ -112,6 +112,28 @@ const ApplicationView = () => {
         LoadApplication();
     }, []);
 
+    const handleAction = async (accept) => {
+        let apiUrl = 'http://localhost:8000/api/doctor/application/' + (accept ? "accept" : "reject");
+
+        const response = await axios.post(apiUrl, null, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                'Accept': 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json'
+            },
+
+            params: {
+                "id": application_id
+            }
+        });
+
+        const data = response.data;
+
+        if (data.status === "Request was successful") {
+            navigate('../doctor/posting/applications?id=' + posting_id);
+        }
+    };
+
     return(
         <div className="container container-default w-75">
             <h1>Review Application</h1>
@@ -134,8 +156,8 @@ const ApplicationView = () => {
             </ul>
 
             {/* Set up accepting and rejecting open applications */}
-            <button className="btn btn-success w-50" disabled={posting.status === "OPEN" ? false : true}>Accept</button>
-            <button className="btn btn-danger w-50" disabled={posting.status === "OPEN" ? false : true}>Reject</button>
+            <button className="btn btn-success w-50" onClick={() => {handleAction(true)}} disabled={posting.status === "OPEN" ? false : true}>Accept</button>
+            <button className="btn btn-danger w-50" onClick={() => {handleAction(false)}} disabled={posting.status === "OPEN" ? false : true}>Reject</button>
         </div>
     );
 }
