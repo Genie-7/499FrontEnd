@@ -1,10 +1,7 @@
   In General:
  - Dashboards for students and doctors including more feature previews 
- - Make entire site look better (clean up UI components) (CreateDoctor,Matches,PositionDetail,CreateResidency cleaned)
-    1.Create doctor
-    2.Matches
-    3.Apply to Matches(PosDetails)
-    4.Create residency
+ - Make entire site look better (clean up UI components) 
+ (CreateDoctor,Matches,PositionDetail,CreateResidency cleaned)
  - seeder for medical institutions
  
  Students:
