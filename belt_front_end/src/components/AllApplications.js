@@ -34,7 +34,7 @@ const AllApplications = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="container mt-4">
+        <div className="container container-default w-250">
             <h2>My Applications</h2>
             {applications.length > 0 ? (
                 <ul className="list-group">
