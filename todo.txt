@@ -1,0 +1,22 @@
+  In General:
+ - Dashboards for students and doctors including more feature previews 
+ - Make entire site look better (clean up UI components)
+    1.Create doctor DONE L
+    2.Matches DONE B
+    2.5 Applications
+    3.Apply to Matches(PosDetails)
+    4.Create residency DONE L
+ 
+ Students:
+ -View grades
+ -Matches:
+   - make matching positions show side by side
+   - Make title like centered/styled -> style text in matches
+-Position details:
+   - Add styling
+
+ - get all grades route
+ - specify location preferences
+
+ Doctors:
+ - Let doctors accept/reject applications

@@ -34,6 +34,8 @@ function App() {
           <Navbar />
 
           <Routes>
+            <Route path="/" element={<ProtectedRoute><StudentRoute><Navigate to="/studentDashboard" /></StudentRoute></ProtectedRoute>} />
+            <Route path="/" element={<ProtectedRoute><DoctorRoute><Navigate to="/doctorDashboard" /></DoctorRoute></ProtectedRoute>} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<Register />} />
