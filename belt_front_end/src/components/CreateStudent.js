@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
@@ -7,14 +7,41 @@ const CreateStudent = () => {
         name: '',
         dob: '',
         gender: '',
-        graduation_year: 0,
-        educational_institution_id: 0,
+        graduation_year: '',
+        educational_institution_id: '',
         medical_discipline: '',
         prefers_research: false,
         user_id: 0
     });
 
+    const [educationalInstitutions, setEducationalInstitutions] = useState([]);
+
     const navigate = useNavigate(); // Initialize useNavigate
+
+    useEffect(() => {
+        const fetchEducationalInstitutions = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/educational/get', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/json'
+                    },
+                });
+                //setEducationalInstitutions(response.data.data.institutions);
+                const institutions = response.data.data.institutions;
+                if (Array.isArray(institutions)) {
+                    setEducationalInstitutions(institutions);
+                } else {
+                    console.error('Institutions data is not an array:', institutions);
+                    setEducationalInstitutions([]); // Fallback to empty array
+                }
+            } catch (error) {
+                console.error('Failed to fetch educational institutions:', error);
+            }
+        };
+        fetchEducationalInstitutions();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,7 +73,7 @@ const CreateStudent = () => {
             const response = await axios.post('http://localhost:8000/api/student/create', body, config);
             console.log(response.data); // Handle response, e.g., storing the user token
             //Get id from response to store in localstorage as doctorId
-
+            localStorage.setItem('studentId', response.data.data.student.id);
             navigate('/studentDashboard'); // Redirect to another route on success
         } catch (error) {
             console.error(error.response.data); // Handle error
@@ -70,25 +97,33 @@ const CreateStudent = () => {
                 </div>
                 <div className="form-group">
                     <input
-                        type="date"
+                        type={formData.dob ? "date" : "text"}
                         className="form-control"
                         name="dob"
-                        value={formData.dob}
+                        value={formData.dob ? formData.dob : "Date of Birth"}
+                        onFocus={(e) => {
+                            if (e.target.type !== "date") {
+                                e.target.type = "date";
+                                e.target.value = '';
+                            }
+                        }}
+                        onBlur={(e) => {
+                            if (e.target.value === '') {
+                                e.target.type = "text";
+                                e.target.value = "Date of Birth";
+                            }
+                        }}
                         onChange={handleChange}
-                        placeholder="Date of Birth"
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="gender"
-                        value={formData.gender}
-                        onChange={handleChange}
-                        placeholder="gender"
-                        required
-                    />
+                <div className="mb-3">
+                    <select className="form-select" name="gender" value={formData.gender} onChange={handleChange} required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <input
@@ -101,16 +136,21 @@ const CreateStudent = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        className="form-control"
+                <div className="mb-3">
+                    <select
+                        className="form-select"
                         name="educational_institution_id"
                         value={formData.educational_institution_id}
                         onChange={handleChange}
-                        placeholder="School ID"
                         required
-                    />
+                    >
+                        <option value="">Select Educational Institution</option>
+                        {educationalInstitutions.map((institution) => (
+                            <option key={institution.id} value={institution.id}>
+                                {institution.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group">
                     <input

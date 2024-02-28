@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,27 @@ const CreateDoctor = () => {
         user_id: ''
     });
 
+    const [medicalInstitutions, setMedicalInstitutions] = useState([]);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchMedicalInstitutions = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/medical_institutions', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/json'
+                    },
+                });
+                setMedicalInstitutions(response.data.data.institutions);
+            } catch (error) {
+                console.error('Failed to fetch medical institutions:', error);
+            }
+        };
+        fetchMedicalInstitutions();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +51,8 @@ const CreateDoctor = () => {
             formData.medical_institution_id = parseInt(formData.medical_institution_id);
             formData.user_id = parseInt(localStorage.getItem("userId"));
             const body = JSON.stringify(formData);
-            await axios.post('http://localhost:8000/api/doctor/create', body, config);
+            const response = await axios.post('http://localhost:8000/api/doctor/create', body, config);
+            localStorage.setItem('doctorId', response.data.data.doctor.id);
             navigate('/doctorDashboard');
         } catch (error) {
             console.error(error.response.data);
@@ -39,8 +60,8 @@ const CreateDoctor = () => {
     };
 
     return (
-        <div className="container mt-5">
-            <h2 className="mb-4">Create Doctor Profile</h2>
+        <div className="container container-default w-25">
+            <h2>Create Doctor Profile</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <input
@@ -55,10 +76,22 @@ const CreateDoctor = () => {
                 </div>
                 <div className="mb-3">
                     <input
-                        type="date"
+                        type={formData.dob ? "date" : "text"}
                         className="form-control"
                         name="dob"
-                        value={formData.dob}
+                        value={formData.dob ? formData.dob : "Date of Birth"}
+                        onFocus={(e) => {
+                            if (e.target.type !== "date") {
+                                e.target.type = "date";
+                                e.target.value = '';
+                            }
+                        }}
+                        onBlur={(e) => {
+                            if (e.target.value === '') {
+                                e.target.type = "text";
+                                e.target.value = "Date of Birth";
+                            }
+                        }}
                         onChange={handleChange}
                         required
                     />
@@ -72,15 +105,20 @@ const CreateDoctor = () => {
                     </select>
                 </div>
                 <div className="mb-3">
-                    <input
-                        type="number"
-                        className="form-control"
+                    <select
+                        className="form-select"
                         name="medical_institution_id"
                         value={formData.medical_institution_id}
                         onChange={handleChange}
-                        placeholder="Medical Institution ID"
                         required
-                    />
+                    >
+                        <option value="">Select Medical Institution</option>
+                        {medicalInstitutions.map((institution) => (
+                            <option key={institution.id} value={institution.id}>
+                                {institution.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-3">
                     <input
