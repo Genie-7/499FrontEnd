@@ -26,16 +26,14 @@ const Navbar = () => {
                 </>
               )}
               {userType === 'student' && (
-                <>
+                <>          
+                  <Link className="navbar-brand" to="/studentDashboard">BELT RMS</Link>
                   <li className="nav-item">
                     <Link className="nav-link" to="/studentDashboard">Student Dashboard</Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/submitGrade">Add Grade</Link>
                   </li>
-                  {/* <li className="nav-item">
-                    <Link className="nav-link" to="/student/applications/all">Applications</Link>
-                  </li> */}
                   <li className="nav-item">
                     <Link className="nav-link" to="/student/matches">Matches</Link>
                   </li>
