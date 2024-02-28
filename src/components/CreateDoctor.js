@@ -63,7 +63,7 @@ const CreateDoctor = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container container-default w-25">
             <h2 className="mb-4">Create Doctor Profile</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -78,11 +78,23 @@ const CreateDoctor = () => {
                     />
                 </div>
                 <div className="mb-3">
-                    <input
-                        type="date"
+                <input
+                        type={formData.dob ? "date" : "text"}
                         className="form-control"
                         name="dob"
-                        value={formData.dob}
+                        value={formData.dob ? formData.dob : "Date of Birth"}
+                        onFocus={(e) => {
+                            if (e.target.type !== "date") {
+                                e.target.type = "date";
+                                e.target.value = '';
+                            }
+                        }}
+                        onBlur={(e) => {
+                            if (e.target.value === '') {
+                                e.target.type = "text";
+                                e.target.value = "Date of Birth";
+                            }
+                        }}
                         onChange={handleChange}
                         required
                     />
