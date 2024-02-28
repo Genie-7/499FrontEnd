@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,8 +14,28 @@ const CreateResidencyPositionForm = () => {
         prefers_new_grads: false,
         medical_institution_id: '',
     });
+    
+    const [medicalInstitutions, setMedicalInstitutions] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchMedicalInstitutions = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/medical_institutions', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/json'
+                    },
+                });
+                setMedicalInstitutions(response.data.data.institutions);
+            } catch (error) {
+                console.error('Failed to fetch medical institutions:', error);
+            }
+        };
+        fetchMedicalInstitutions();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -36,8 +56,9 @@ const CreateResidencyPositionForm = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8000/api/doctor/position/create', formData, config);
-            console.log('Residency Position Created:', response.data);
+            formData.medical_institution_id = parseInt(formData.medical_institution_id);
+            const body = JSON.stringify(formData);
+            await axios.post('http://localhost:8000/api/doctor/position/create', body, config);
             navigate('/doctorDashboard');
         } catch (error) {
             console.error('Error creating residency position:', error.response.data);
@@ -46,7 +67,7 @@ const CreateResidencyPositionForm = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container container-default w-25">
             <h2 className="mb-4">Create Residency Position</h2>
             {error && <p className="text-danger">{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -124,15 +145,20 @@ const CreateResidencyPositionForm = () => {
                     <label className="form-check-label">Prefers New Grads</label>
                 </div>
                 <div className="mb-3">
-                    <input
-                        type="number"
-                        className="form-control"
+                    <select
+                        className="form-select"
                         name="medical_institution_id"
                         value={formData.medical_institution_id}
                         onChange={handleChange}
-                        placeholder="Medical Institution ID"
                         required
-                    />
+                    >
+                        <option value="">Select Medical Institution</option>
+                        {medicalInstitutions.map((institution) => (
+                            <option key={institution.id} value={institution.id}>
+                                {institution.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary w-100">Create Residency</button>
             </form>
