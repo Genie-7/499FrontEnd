@@ -27,7 +27,6 @@ const Navbar = () => {
               )}
               {userType === 'student' && (
                 <>          
-                  <Link className="navbar-brand" to="/studentDashboard">BELT RMS</Link>
                   <li className="nav-item">
                     <Link className="nav-link" to="/studentDashboard">Student Dashboard</Link>
                   </li>
